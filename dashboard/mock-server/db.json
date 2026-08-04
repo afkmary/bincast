@@ -1,0 +1,36 @@
+{
+  "bins": [
+    {
+      "bin_id": "bin-001",
+      "location": "Main Building - Lobby",
+      "fill_percent": 82,
+      "classification": "full",
+      "last_updated": "2026-08-04T14:32:00Z",
+      "recommendation": "Bin nearing capacity — schedule pickup soon."
+    },
+    {
+      "bin_id": "bin-002",
+      "location": "Main Building - Cafeteria",
+      "fill_percent": 45,
+      "classification": "not_full",
+      "last_updated": "2026-08-04T14:30:00Z",
+      "recommendation": null
+    }
+  ],
+  "history": {
+    "bin-001": [
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 20
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 38
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 82
+      }
+    ]
+  }
+}
