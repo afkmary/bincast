@@ -1,4 +1,8 @@
-# Smart Bin Retrofit — Docs
+# Smart Bin Retrofit
+
+A universal clip-on retrofit device (ultrasonic fill sensor + small LCD) that
+attaches to any existing bin, reports fill level, and uses an AI agent to
+flag genuinely-full vs. obstructed vs. abnormal readings.
 
 ## Team & Tasks
 
@@ -39,12 +43,7 @@
 - Help Jared put the hardware together (wiring, breadboard)
 - Set up demo backups (spare hotspot, test-event button)
 
-## Project summary
-A universal clip-on retrofit device (ultrasonic fill sensor + small LCD) that
-attaches to any existing bin, reports fill level, and uses an AI agent to
-flag genuinely-full vs. obstructed vs. abnormal readings.
-
-### Reading (sent from edge device → cloud)
+### Reading (edge device → cloud)
 ```json
 {
   "bin_id": "string",
@@ -56,14 +55,14 @@ flag genuinely-full vs. obstructed vs. abnormal readings.
 }
 ```
 
-### Agent output (sent from AI agent → dashboard)
+### Agent output (AI agent → dashboard)
 ```json
 {
   "bin_id": "string",
   "timestamp": "ISO 8601 string",
   "classification": "full | not_full | obstructed | anomaly",
   "confidence": 0.0-1.0,
-  "recommendation": "string (human-readable, e.g. 'Inspect bin — possible obstruction')",
+  "recommendation": "string",
   "requires_human_approval": true
 }
 ```
@@ -89,4 +88,10 @@ flag genuinely-full vs. obstructed vs. abnormal readings.
 - `/edge-device` — sensor/Pi firmware (Jared)
 - `/agent` — AI agent & workflow (Anh Quan)
 - `/infra` — Azure config/deployment (Kate)
-- `/docs` — this folder — contract, notes, proposal excerpts
+
+## Status
+- [ ] Data contract locked (currently draft)
+- [ ] Mock data available for dashboard dev
+- [ ] Azure resources provisioned
+- [ ] Edge device sending real readings
+- [ ] Agent classification live
