@@ -8,11 +8,11 @@ export default function FillGauge({ percent, size = 100 }: FillGaugeProps) {
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percent / 100) * circumference;
 
-  const color = percent >= 80 ? "#e53935" : percent >= 50 ? "#fbc02d" : "#43a047";
+  const color = percent >= 80 ? "#e08a5b" : percent >= 50 ? "#e8b04b" : "#6fb98f";
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#e0e0e0" strokeWidth="8" />
+      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#e3f2e8" strokeWidth="8" />
       <circle
         cx={size / 2}
         cy={size / 2}

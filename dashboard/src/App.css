@@ -1,77 +1,33 @@
 .app {
-  font-family: system-ui, sans-serif;
-  background: #f5f6f8;
+  font-family: 'Poppins', system-ui, sans-serif;
+  background: #eaf6ef;
   min-height: 100vh;
-  padding: 2rem;
+  width: 100%;
+  padding: 2.5rem 3rem;
 }
 
 .app-header h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: #222;
-}
-
-.bin-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
-}
-
-.bin-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.bin-card-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.bin-card-header h3 {
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-.bin-tag {
-  color: white;
-  font-size: 0.7rem;
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-
-.bin-recommendation {
-  font-size: 0.8rem;
-  color: #555;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.75rem;
+  color: #2e5c4a;
   text-align: center;
-  margin: 0;
-}
-
-.bin-updated {
-  font-size: 0.7rem;
-  color: #999;
-  margin: 0;
 }
 
 .queue-section {
-  background: white;
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(76, 175, 133, 0.12);
+  border: 1px solid #d9f0e2;
 }
 
 .queue-section h2 {
-  font-size: 1.1rem;
-  margin: 0 0 0.75rem 0;
-  color: #222;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.85rem 0;
+  color: #2e5c4a;
 }
 
 .pickup-queue {
@@ -87,32 +43,86 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.75rem;
-  background: #fafafa;
-  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  background: #f3faf6;
+  border-radius: 12px;
   font-size: 0.9rem;
+  color: #3a4a44;
 }
 
 .queue-percent {
-  font-weight: bold;
-  color: #e53935;
+  font-weight: 700;
+  color: #e08a5b;
 }
 
 .queue-empty {
-  color: #777;
+  color: #8aa89a;
   font-size: 0.9rem;
   margin: 0;
 }
 
+.bin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.bin-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 10px rgba(76, 175, 133, 0.12);
+  border: 1px solid #d9f0e2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.bin-card-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bin-card-header h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+  color: #2e5c4a;
+}
+
+.bin-tag {
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.bin-recommendation {
+  font-size: 0.8rem;
+  color: #5c6f66;
+  text-align: center;
+  margin: 0;
+}
+
+.bin-updated {
+  font-size: 0.7rem;
+  color: #a3b8ae;
+  margin: 0;
+}
+
 .no-history {
-  color: #aaa;
+  color: #b7cdc1;
   font-size: 0.75rem;
   text-align: center;
   margin: 0.5rem 0;
 }
 
 .error {
-  color: #e53935;
+  color: #e08a5b;
   font-size: 1rem;
   text-align: center;
   margin-top: 2rem;

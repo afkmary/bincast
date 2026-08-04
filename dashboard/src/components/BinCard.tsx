@@ -15,10 +15,10 @@ const classificationLabel: Record<Bin["classification"], string> = {
 };
 
 const classificationColor: Record<Bin["classification"], string> = {
-  full: "#e53935",
-  not_full: "#43a047",
-  obstructed: "#fb8c00",
-  anomaly: "#8e24aa",
+  full: "#e0645b",
+  not_full: "#6fb98f",
+  obstructed: "#e8b04b",
+  anomaly: "#7a9cc6",
 };
 
 export default function BinCard({ bin }: BinCardProps) {
