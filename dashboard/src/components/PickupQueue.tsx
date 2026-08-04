@@ -14,13 +14,16 @@ export default function PickupQueue({ bins }: PickupQueueProps) {
   }
 
   return (
-    <ul className="pickup-queue">
+    <div className="pickup-queue">
       {queue.map((bin) => (
-        <li key={bin.bin_id}>
-          <span>{bin.location}</span>
-          <span className="queue-percent">{bin.fill_percent}%</span>
-        </li>
+        <div key={bin.bin_id} className="pickup-row">
+          <span className="pickup-label">{bin.location}</span>
+          <div className="pickup-bar-track">
+            <div className="pickup-bar-fill" style={{ width: `${bin.fill_percent}%` }} />
+          </div>
+          <span className="pickup-percent">{bin.fill_percent}%</span>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }

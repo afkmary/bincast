@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchBins, type Bin } from "./api";
 import BinCard from "./components/BinCard";
 import PickupQueue from "./components/PickupQueue";
+import DecisionLog from "./components/DecisionLog";
 import "./App.css";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
         <h1>Smart Bin Dashboard</h1>
       </header>
       <main>
-        <section className="queue-section">
+        <section className="section-plain">
           <h2>Pickup Queue</h2>
           <PickupQueue bins={bins} />
         </section>
@@ -35,6 +36,11 @@ function App() {
             <BinCard key={bin.bin_id} bin={bin} />
           ))}
         </div>
+
+        <section className="queue-section">
+          <h2>Decision Log</h2>
+          <DecisionLog />
+        </section>
       </main>
     </div>
   );

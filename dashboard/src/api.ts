@@ -1,4 +1,4 @@
-// api.ts
+// dashboard/src/api.ts
 export interface Bin {
   bin_id: string;
   location: string;
@@ -11,6 +11,15 @@ export interface Bin {
 export interface HistoryPoint {
   timestamp: string;
   fill_percent: number;
+}
+
+export interface Decision {
+  id?: string;
+  bin_id: string;
+  location: string;
+  recommendation: string;
+  decision: "approved" | "rejected";
+  timestamp: string;
 }
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -26,4 +35,20 @@ export async function fetchHistory(binId: string): Promise<HistoryPoint[]> {
   if (!res.ok) throw new Error("Failed to fetch history");
   const all = await res.json();
   return all[binId] ?? [];
+}
+
+export async function postDecision(decision: Decision): Promise<Decision> {
+  const res = await fetch(`${API_URL}/decisions`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(decision),
+  });
+  if (!res.ok) throw new Error("Failed to save decision");
+  return res.json();
+}
+
+export async function fetchDecisions(): Promise<Decision[]> {
+  const res = await fetch(`${API_URL}/decisions`);
+  if (!res.ok) throw new Error("Failed to fetch decisions");
+  return res.json();
 }
