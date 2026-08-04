@@ -44,10 +44,6 @@ A universal clip-on retrofit device (ultrasonic fill sensor + small LCD) that
 attaches to any existing bin, reports fill level, and uses an AI agent to
 flag genuinely-full vs. obstructed vs. abnormal readings.
 
-## Data Contract (v0.1 — draft)
-This is the shared shape everyone builds/tests against using mock data
-until real integrations are wired up. Edit this together before locking it.
-
 ### Reading (sent from edge device → cloud)
 ```json
 {
