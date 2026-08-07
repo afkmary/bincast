@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bincast/schema/reading.schema.json",
+  "title": "Bin reading",
+  "description": "A single fill-level reading sent from a Bincast device to the cloud ingest endpoint. All field names are snake_case.",
+  "type": "object",
+  "required": [
+    "device_id",
+    "bin_id",
+    "timestamp",
+    "raw_distance_cm",
+    "fill_percentage",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "device_id": {
+      "type": "string",
+      "description": "The clip-on device itself. Set in device/config.py and never changes.",
+      "pattern": "^[a-z0-9-]{3,32}$",
+      "examples": ["dev-a1"]
+    },
+    "bin_id": {
+      "type": "string",
+      "description": "Which bin the device is currently attached to. Separate from device_id because the device is designed to move between bins.",
+      "pattern": "^[a-z0-9-]{3,32}$",
+      "examples": ["bin-001"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC time the reading was taken, ISO 8601. Time taken, not time sent -- a buffered reading keeps its original timestamp."
+    },
+    "raw_distance_cm": {
+      "type": "number",
+      "description": "Median distance from sensor to the top of the contents, in centimetres.",
+      "minimum": 0,
+      "maximum": 500
+    },
+    "fill_percentage": {
+      "type": "number",
+      "description": "Fill level derived from raw_distance_cm and the current calibration. 0 = empty, 100 = full. Clamped at both ends.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "status": {
+      "type": "string",
+      "description": "The device's own assessment. The agent may disagree and override it.",
+      "enum": ["ok", "warning", "full", "obstructed", "error"]
+    },
+    "calibration": {
+      "type": "object",
+      "description": "The empty and full reference points the device learned for this bin by observation. Replaces any configured bin height -- nothing here is entered by a human.",
+      "required": ["empty_cm", "full_cm", "confident"],
+      "additionalProperties": false,
+      "properties": {
+        "empty_cm": {
+          "type": "number",
+          "description": "Distance observed when the bin is empty. Effectively the bin's usable depth, learned rather than configured.",
+          "minimum": 0,
+          "maximum": 500
+        },
+        "full_cm": {
+          "type": "number",
+          "description": "Distance at which the bin is treated as full.",
+          "minimum": 0,
+          "maximum": 500
+        },
+        "confident": {
+          "type": "boolean",
+          "description": "False while the device is still learning the range. Downstream must treat fill_percentage as provisional when this is false."
+        },
+        "sample_count": {
+          "type": "integer",
+          "description": "How many readings the calibration is based on.",
+          "minimum": 0
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "description": "Raw signal evidence for this reading. The agent uses this to reach its own confidence rather than being handed a number.",
+      "additionalProperties": false,
+      "properties": {
+        "samples": {
+          "type": "integer",
+          "description": "Raw pings taken before median filtering.",
+          "minimum": 1
+        },
+        "spread_cm": {
+          "type": "number",
+          "description": "Range between the highest and lowest raw sample. A large spread suggests an unstable surface or a bad reflection -- the main obstruction signal.",
+          "minimum": 0
+        },
+        "rejected": {
+          "type": "integer",
+          "description": "Raw samples discarded as out of range.",
+          "minimum": 0
+        }
+      }
+    },
+    "fill_rate_cm_per_hr": {
+      "type": "number",
+      "description": "How fast the level has been rising since the previous reading. Lets the dashboard forecast pickup timing, and lets the agent flag physically implausible jumps.",
+      "minimum": 0
+    },
+    "connectivity_status": {
+      "type": "string",
+      "description": "Link state at the time of sending. 'stale' means the device is reachable but has not reported on schedule.",
+      "enum": ["online", "offline", "stale"]
+    },
+    "buffered": {
+      "type": "boolean",
+      "description": "True if this reading was held on the device during an outage and sent later.",
+      "default": false
+    },
+    "firmware_version": {
+      "type": "string",
+      "description": "Semantic version of the device code that produced this reading.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "examples": ["0.1.0"]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/bincast/schema/agent-output.schema.json",
+  "title": "Agent decision",
+  "description": "The AI agent's assessment of a bin reading, returned to the cloud layer and shown on the dashboard for human approval. All field names are snake_case.",
+  "type": "object",
+  "required": [
+    "device_id",
+    "bin_id",
+    "timestamp",
+    "fill_percentage",
+    "confidence",
+    "action",
+    "reasoning"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "device_id": {
+      "type": "string",
+      "description": "Matches device_id on the reading this decision is about.",
+      "pattern": "^[a-z0-9-]{3,32}$"
+    },
+    "bin_id": {
+      "type": "string",
+      "description": "Matches bin_id on the reading this decision is about.",
+      "pattern": "^[a-z0-9-]{3,32}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the reading being assessed, so a decision can be traced back to its input."
+    },
+    "fill_percentage": {
+      "type": "number",
+      "description": "The agent's own fill estimate. May differ from the device's if it judges the raw reading unreliable.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "confidence": {
+      "type": "number",
+      "description": "How sure the agent is of its assessment, reached from the reading's quality and calibration fields. 0 = no confidence, 1 = certain.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "action": {
+      "type": "string",
+      "description": "What the agent recommends. A human approves or rejects this on the dashboard.",
+      "enum": ["no_action", "schedule_pickup", "inspect", "recalibrate"]
+    },
+    "reasoning": {
+      "type": "string",
+      "description": "Plain-language explanation of the recommendation, shown verbatim on the dashboard. This is the explainability requirement -- never leave it empty.",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "anomaly": {
+      "type": "object",
+      "description": "Present when the agent judges the reading abnormal rather than simply high or low.",
+      "required": ["detected", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "detected": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string",
+          "description": "obstruction = something blocking the sensor's view. implausible_jump = level changed faster than physically likely. stuck_reading = identical values over time, suggesting a failed sensor.",
+          "enum": [
+            "none",
+            "obstruction",
+            "sensor_error",
+            "implausible_jump",
+            "stuck_reading",
+            "uncalibrated"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "description": "Short detail about the anomaly.",
+          "maxLength": 200
+        }
+      }
+    },
+    "predicted_full_at": {
+      "type": ["string", "null"],
+      "description": "Projected time the bin reaches full, extrapolated from fill_rate_cm_per_hr. Null when the rate is unknown or the reading is untrustworthy.",
+      "format": "date-time"
+    },
+    "model_version": {
+      "type": "string",
+      "description": "Which agent version produced this decision, so the decision log stays meaningful as the agent changes."
+    }
+  }
+}
