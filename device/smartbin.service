@@ -1,0 +1,34 @@
+[Unit]
+Description=Bincast bin fill sensor
+# Wait for the network, but don't refuse to start without it -- the device
+# is supposed to work offline and cache. This only delays startup slightly.
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/bincast/device
+ExecStart=/usr/bin/python3 /home/pi/bincast/device/main.py
+
+# Restart forever, no matter how it exits. A bin sensor that dies overnight
+# and stays dead is the failure mode to design against.
+Restart=always
+RestartSec=10
+
+# Send print() straight to the journal instead of buffering it, so
+# `journalctl -u bincast -f` shows output live.
+Environment=PYTHONUNBUFFERED=1
+
+# Identity and endpoint. Edit these per device -- this is the only file
+# that differs between units.
+Environment=BINCAST_DEVICE_ID=dev-a1
+Environment=BINCAST_BIN_ID=bin-001
+Environment=BINCAST_API_URL=
+Environment=BINCAST_API_KEY=
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
