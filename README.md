@@ -1,4 +1,4 @@
-# Smart Bin Retrofit
+# BinCast
 
 A universal clip-on retrofit device (ultrasonic fill sensor + small LCD) that
 attaches to any existing bin, reports fill level, and uses an AI agent to
