@@ -6,7 +6,7 @@
       "fill_percent": 82,
       "classification": "full",
       "last_updated": "2026-08-04T14:32:00Z",
-      "recommendation": "Bin nearing capacity — schedule pickup soon."
+      "recommendation": "Bin nearing capacity - schedule pickup soon."
     },
     {
       "bin_id": "bin-002",
@@ -15,23 +15,362 @@
       "classification": "not_full",
       "last_updated": "2026-08-04T14:30:00Z",
       "recommendation": null
+    },
+    {
+      "bin_id": "bin-003",
+      "location": "Main Building - 2nd Floor Hall",
+      "fill_percent": 61,
+      "classification": "not_full",
+      "last_updated": "2026-08-04T14:28:00Z",
+      "recommendation": null
+    },
+    {
+      "bin_id": "bin-004",
+      "location": "Library - Ground Floor",
+      "fill_percent": 91,
+      "classification": "full",
+      "last_updated": "2026-08-04T14:33:00Z",
+      "recommendation": "Above pickup threshold - dispatch before the evening round."
+    },
+    {
+      "bin_id": "bin-005",
+      "location": "Library - Study Commons",
+      "fill_percent": 28,
+      "classification": "not_full",
+      "last_updated": "2026-08-04T14:31:00Z",
+      "recommendation": null
+    },
+    {
+      "bin_id": "bin-006",
+      "location": "Parkade - Level 1",
+      "fill_percent": 38,
+      "classification": "obstructed",
+      "last_updated": "2026-08-04T14:29:00Z",
+      "recommendation": "Readings unchanged for 40 minutes - check the sensor for a blockage."
+    },
+    {
+      "bin_id": "bin-007",
+      "location": "Campus Centre - Food Court",
+      "fill_percent": 74,
+      "classification": "anomaly",
+      "last_updated": "2026-08-04T14:31:00Z",
+      "recommendation": "Fill jumped 39% in one interval - verify on site before dispatch."
+    },
+    {
+      "bin_id": "bin-008",
+      "location": "Athletics - Gym Entrance",
+      "fill_percent": 12,
+      "classification": "not_full",
+      "last_updated": "2026-08-04T14:27:00Z",
+      "recommendation": null
     }
   ],
   "history": {
     "bin-001": [
       {
-        "timestamp": "2026-08-04T08:00:00Z",
+        "timestamp": "2026-08-04T00:00:00Z",
         "fill_percent": 20
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 28
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 35
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 44
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 53
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 62
+      },
+      {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 73
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 82
+      }
+    ],
+    "bin-002": [
+      {
+        "timestamp": "2026-08-04T00:00:00Z",
+        "fill_percent": 6
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 11
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 17
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 22
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 28
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 34
+      },
+      {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 40
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 45
+      }
+    ],
+    "bin-003": [
+      {
+        "timestamp": "2026-08-04T00:00:00Z",
+        "fill_percent": 8
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 15
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 22
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 29
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 37
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 45
+      },
+      {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 53
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 61
+      }
+    ],
+    "bin-004": [
+      {
+        "timestamp": "2026-08-04T00:00:00Z",
+        "fill_percent": 24
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 33
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 41
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 50
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 60
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 71
+      },
+      {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 82
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 91
+      }
+    ],
+    "bin-005": [
+      {
+        "timestamp": "2026-08-04T00:00:00Z",
+        "fill_percent": 3
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 7
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 10
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 14
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 17
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 21
+      },
+      {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 25
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 28
+      }
+    ],
+    "bin-006": [
+      {
+        "timestamp": "2026-08-04T00:00:00Z",
+        "fill_percent": 9
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 16
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 23
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 30
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 36
       },
       {
         "timestamp": "2026-08-04T10:00:00Z",
         "fill_percent": 38
       },
       {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 38
+      },
+      {
         "timestamp": "2026-08-04T14:00:00Z",
-        "fill_percent": 82
+        "fill_percent": 38
+      }
+    ],
+    "bin-007": [
+      {
+        "timestamp": "2026-08-04T00:00:00Z",
+        "fill_percent": 5
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 9
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 14
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 18
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 23
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 28
+      },
+      {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 35
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 74
+      }
+    ],
+    "bin-008": [
+      {
+        "timestamp": "2026-08-04T00:00:00Z",
+        "fill_percent": 1
+      },
+      {
+        "timestamp": "2026-08-04T02:00:00Z",
+        "fill_percent": 2
+      },
+      {
+        "timestamp": "2026-08-04T04:00:00Z",
+        "fill_percent": 4
+      },
+      {
+        "timestamp": "2026-08-04T06:00:00Z",
+        "fill_percent": 5
+      },
+      {
+        "timestamp": "2026-08-04T08:00:00Z",
+        "fill_percent": 7
+      },
+      {
+        "timestamp": "2026-08-04T10:00:00Z",
+        "fill_percent": 9
+      },
+      {
+        "timestamp": "2026-08-04T12:00:00Z",
+        "fill_percent": 10
+      },
+      {
+        "timestamp": "2026-08-04T14:00:00Z",
+        "fill_percent": 12
       }
     ]
   },
-  "decisions": []
+  "decisions": [
+    {
+      "id": "d1",
+      "bin_id": "bin-004",
+      "location": "Library - Ground Floor",
+      "recommendation": "Above pickup threshold - dispatch before the evening round.",
+      "decision": "approved",
+      "timestamp": "2026-08-04T11:12:00Z"
+    },
+    {
+      "id": "d2",
+      "bin_id": "bin-002",
+      "location": "Main Building - Cafeteria",
+      "recommendation": "Bin nearing capacity - schedule pickup soon.",
+      "decision": "rejected",
+      "timestamp": "2026-08-04T12:40:00Z"
+    },
+    {
+      "id": "d3",
+      "bin_id": "bin-006",
+      "location": "Parkade - Level 1",
+      "recommendation": "Recalibrate empty point - baseline drift detected.",
+      "decision": "approved",
+      "timestamp": "2026-08-04T13:55:00Z"
+    },
+    {
+      "id": "d4",
+      "bin_id": "bin-007",
+      "location": "Campus Centre - Food Court",
+      "recommendation": "Hold for now - fill rising within normal range.",
+      "decision": "approved",
+      "timestamp": "2026-08-04T14:10:00Z"
+    }
+  ]
 }

@@ -1,169 +1,29 @@
+/* =====================================================================
+   bincast dashboard — App.css
+
+   1. Page
+   2. Brand header
+   3. Section shells
+   4. Status summary
+   5. Bin grid + cards
+   6. Fill gauge
+   7. History chart
+   8. Approve / reject
+   9. Decision log
+   10. Motion preferences
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Page
+   --------------------------------------------------------------------- */
+
 .app {
   font-family: 'Poppins', system-ui, sans-serif;
-  background: #eaf6ef;
+  background: #dceee5;
   min-height: 100vh;
   width: 100%;
   padding: 2.5rem 3rem;
-}
-
-.app-header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.75rem;
-  color: #2e5c4a;
-  text-align: center;
-}
-
-.queue-section {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 1.25rem 1.75rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 10px rgba(76, 175, 133, 0.12);
-  border: 1px solid #d9f0e2;
-}
-
-.queue-section h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 0.85rem 0;
-  color: #2e5c4a;
-}
-
-.pickup-queue {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.section-plain {
-  margin-bottom: 2rem;
-}
-
-.section-plain h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 0.85rem 0;
-  color: #2e5c4a;
-}
-
-.pickup-queue {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.pickup-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.pickup-label {
-  width: 160px;
-  flex-shrink: 0;
-  font-size: 0.9rem;
-  color: #3a4a44;
-}
-
-.pickup-bar-track {
-  flex: 1;
-  height: 22px;
-  background: #dcefe3;
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.pickup-bar-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #f0a878, #e08a5b);
-  transition: width 0.5s ease;
-  box-shadow: 0 1px 2px rgba(224, 138, 91, 0.4);
-}
-
-.pickup-percent {
-  width: 40px;
-  text-align: right;
-  font-weight: 700;
-  color: #e08a5b;
-  font-size: 0.9rem;
-}
-
-.queue-percent {
-  font-weight: 700;
-  color: #e08a5b;
-}
-
-.queue-empty {
-  color: #8aa89a;
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.bin-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.bin-card {
-  background: white;
-  border-radius: 20px;
-  padding: 1.25rem;
-  box-shadow: 0 2px 10px rgba(76, 175, 133, 0.12);
-  border: 1px solid #d9f0e2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.bin-card-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.bin-card-header h3 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin: 0;
-  color: #2e5c4a;
-}
-
-.bin-tag {
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 12px;
-}
-
-.bin-recommendation {
-  font-size: 0.8rem;
-  color: #5c6f66;
-  text-align: center;
-  margin: 0;
-}
-
-.bin-updated {
-  font-size: 0.7rem;
-  color: #a3b8ae;
-  margin: 0;
-}
-
-.no-history {
-  color: #b7cdc1;
-  font-size: 0.75rem;
-  text-align: center;
-  margin: 0.5rem 0;
 }
 
 .error {
@@ -173,32 +33,414 @@
   margin-top: 2rem;
 }
 
+
+/* ---------------------------------------------------------------------
+   2. Brand header
+   Three columns: logo right-aligned, divider at page centre, label left.
+   --------------------------------------------------------------------- */
+
+.app-header {
+  margin-bottom: 1.75rem;
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.4rem;
+  width: 100%;
+}
+
+.brand-logo {
+  justify-self: end;
+  height: 220px;
+  width: auto;
+  display: block;
+  margin: -90px 0;
+}
+
+.brand-divider {
+  justify-self: center;
+  width: 2px;
+  height: 48px;
+  background: #a8c9b8;
+  margin: 0;
+}
+
+.brand-sub {
+  justify-self: start;
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #6b8b7c;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. Section shells
+   White panels with a small-caps label and a rule running to the edge.
+   --------------------------------------------------------------------- */
+
+.section-plain,
+.queue-section {
+  background: #ffffff;
+  border: 1px solid #c2e0d0;
+  border-radius: 20px;
+  padding: 1.25rem 1.75rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 12px rgba(46, 92, 74, 0.10);
+}
+
+.section-plain h2,
+.queue-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.35rem 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7d968b;
+}
+
+.section-plain h2::after,
+.queue-section h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #c2ddcd;
+}
+
+
+/* ---------------------------------------------------------------------
+   4. Status summary
+   Four figures divided by upright rules, then the next-up line.
+   --------------------------------------------------------------------- */
+
+.status-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.status-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.status-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.15rem 0 0.15rem 1.6rem;
+  border-left: 1px solid #8fb9a3;
+}
+
+.status-stat:first-child {
+  border-left: none;
+  padding-left: 0;
+}
+
+.status-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #24493a;
+}
+
+.status-label {
+  font-size: 0.8rem;
+  color: #5c7a6f;
+}
+
+.status-stat--warn .status-value {
+  color: #d4854f;
+}
+
+.status-stat--alert .status-value {
+  color: #c9922f;
+}
+
+.status-next {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.25rem 0 0 0;
+  padding: 0.9rem 0 0 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid #e3f2e8;
+  border-radius: 0;
+  font-size: 0.88rem;
+  color: #45635a;
+}
+
+.status-next-tag {
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #6fb98f;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.status-next strong {
+  font-weight: 600;
+  color: #24493a;
+}
+
+.status-next-why {
+  color: #5c7a6f;
+}
+
+/* Shown when a list has nothing in it (status summary, decision log). */
+.queue-empty {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #8aa89a;
+}
+
+
+/* ---------------------------------------------------------------------
+   5. Bin grid + cards
+   Cards have no padding of their own — each child sets its own, which
+   lets the header and footer strips run edge to edge.
+   --------------------------------------------------------------------- */
+
+.bin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  align-items: stretch;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.bin-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #c2e0d0;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(46, 92, 74, 0.10);
+}
+
+.bin-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.15rem;
+  background: #f3faf6;
+  border-bottom: 1px solid #dcefe3;
+}
+
+.bin-card-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #24493a;
+}
+
+.bin-tag {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bin-recommendation {
+  flex: 1;
+  margin: 0;
+  padding: 0.9rem 1.15rem;
+  border-top: 1px solid #eaf4ee;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  text-align: left;
+  color: #45635a;
+}
+
+/* margin-top: auto pins the footer down so cards in a row line up. */
+.bin-updated {
+  margin: auto 0 0 0;
+  padding: 0.6rem 1.15rem;
+  background: #f8fcfa;
+  border-top: 1px solid #eaf4ee;
+  font-size: 0.72rem;
+  text-align: left;
+  color: #7d968b;
+}
+
+
+/* ---------------------------------------------------------------------
+   6. Fill gauge
+   Colours are set inline by the component; these are the static parts.
+   --------------------------------------------------------------------- */
+
+.fill-gauge {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1.1rem 1.15rem 0.25rem;
+}
+
+.fill-gauge-svg {
+  width: 104px;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.fill-gauge-well {
+  fill: #d2e8db;
+}
+
+.fill-gauge-outline {
+  fill: none;
+  stroke: #aed6c1;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.fill-gauge-lid {
+  fill: #aed6c1;
+}
+
+.fill-gauge-level {
+  transition: transform 800ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fill-gauge-value {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.fill-gauge-ping {
+  animation: fill-gauge-ping 3.2s ease-in-out infinite;
+}
+
+@keyframes fill-gauge-ping {
+
+  0%,
+  70%,
+  100% {
+    opacity: 0.3;
+  }
+
+  12% {
+    opacity: 1;
+  }
+}
+
+
+/* ---------------------------------------------------------------------
+   7. History chart
+   --------------------------------------------------------------------- */
+
+.history-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding: 0 1.15rem 0.9rem;
+}
+
+.history-grid {
+  stroke: #e3f2e8;
+  stroke-width: 1;
+}
+
+.history-threshold {
+  stroke: #e8b04b;
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  opacity: 0.85;
+}
+
+.history-threshold-tag {
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  fill: #c9922f;
+}
+
+.history-area {
+  fill: #6fb98f;
+  opacity: 0.14;
+}
+
+.history-line {
+  fill: none;
+  stroke: #3a8563;
+  stroke-width: 2.25;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.history-dot {
+  fill: #3a8563;
+}
+
+.history-dot-last {
+  fill: #ffffff;
+  stroke: #3a8563;
+  stroke-width: 2.5;
+}
+
+.no-history {
+  margin: 0;
+  padding: 0.75rem 1.15rem 1.1rem;
+  font-size: 0.78rem;
+  text-align: center;
+  color: #9ab8a9;
+}
+
+
+/* ---------------------------------------------------------------------
+   8. Approve / reject
+   --------------------------------------------------------------------- */
+
 .decision-buttons {
   display: flex;
   gap: 0.5rem;
-  width: 100%;
+  padding: 0 1.15rem 0.9rem;
 }
 
 .approve-btn,
 .reject-btn {
   flex: 1;
-  padding: 0.5rem;
+  padding: 0.55rem;
   border: none;
   border-radius: 10px;
   font-family: 'Poppins', sans-serif;
-  font-weight: 600;
   font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
   transition: opacity 0.2s;
 }
 
 .approve-btn {
   background: #6fb98f;
-  color: white;
+  color: #ffffff;
 }
 
 .reject-btn {
-  background: #f0f0f0;
+  background: #eef2f0;
   color: #5c6f66;
 }
 
@@ -209,11 +451,12 @@
 }
 
 .decision-tag {
-  font-size: 0.8rem;
-  font-weight: 600;
+  margin: 0 1.15rem 0.9rem;
   padding: 0.3rem 0.8rem;
   border-radius: 10px;
-  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .decision-tag.approved {
@@ -225,6 +468,11 @@
   background: #f5e9e2;
   color: #b5734a;
 }
+
+
+/* ---------------------------------------------------------------------
+   9. Decision log
+   --------------------------------------------------------------------- */
 
 .decision-log {
   list-style: none;
@@ -240,26 +488,27 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 0.6rem 0.9rem;
+  padding: 0.7rem 1rem;
   background: #f3faf6;
+  border: 1px solid #e3f2e8;
   border-radius: 12px;
   font-size: 0.85rem;
 }
 
 .log-location {
-  font-weight: 600;
-  color: #2e5c4a;
   flex-shrink: 0;
+  font-weight: 600;
+  color: #24493a;
 }
 
 .log-recommendation {
-  color: #5c6f66;
   flex: 1;
+  color: #45635a;
 }
 
 .log-decision {
-  font-weight: 700;
   flex-shrink: 0;
+  font-weight: 700;
 }
 
 .log-decision.approved {
@@ -268,4 +517,43 @@
 
 .log-decision.rejected {
   color: #b5734a;
+}
+
+
+/* ---------------------------------------------------------------------
+   10. Responsive + motion preferences
+   --------------------------------------------------------------------- */
+
+/* Four bins across for the poster screenshot. */
+@media (min-width: 1100px) {
+  .bin-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .status-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .status-stat:nth-child(3) {
+    border-left: none;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fill-gauge-level,
+  .fill-gauge-ping {
+    transition: none;
+    animation: none;
+  }
 }

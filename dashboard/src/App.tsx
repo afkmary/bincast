@@ -1,9 +1,9 @@
-// dashboard/src/App.tsx
 import { useEffect, useState } from "react";
 import { fetchBins, type Bin } from "./api";
 import BinCard from "./components/BinCard";
-import PickupQueue from "./components/PickupQueue";
+import StatusSummary from "./components/StatusSummary";
 import DecisionLog from "./components/DecisionLog";
+import Logo from "./components/Logo";
 import "./App.css";
 
 function App() {
@@ -24,13 +24,14 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Smart Bin Dashboard</h1>
+        <Logo />
       </header>
       <main>
         <section className="section-plain">
-          <h2>Pickup Queue</h2>
-          <PickupQueue bins={bins} />
+          <h2>Status</h2>
+          <StatusSummary bins={bins} />
         </section>
+
         <div className="bin-grid">
           {bins.map((bin) => (
             <BinCard key={bin.bin_id} bin={bin} />

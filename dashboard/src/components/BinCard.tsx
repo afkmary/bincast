@@ -57,7 +57,11 @@ export default function BinCard({ bin }: BinCardProps) {
           {classificationLabel[bin.classification]}
         </span>
       </div>
-      <FillGauge percent={bin.fill_percent} />
+      <FillGauge
+        percent={bin.fill_percent}
+        binId={bin.bin_id}
+        classification={bin.classification}
+      />
       <HistoryChart data={history} />
       {bin.recommendation && (
         <>
