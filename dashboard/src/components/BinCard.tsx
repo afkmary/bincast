@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FillGauge from "./FillGauge";
 import HistoryChart from "./HistoryChart";
-import { fetchHistory, postDecision, type Bin, type HistoryPoint } from "../api";
+import { fetchHistory, postDecision, type Bin, type Reading } from "../api";
 
 interface BinCardProps {
   bin: Bin;
@@ -22,7 +22,7 @@ const classificationColor: Record<Bin["classification"], string> = {
 };
 
 export default function BinCard({ bin }: BinCardProps) {
-  const [history, setHistory] = useState<HistoryPoint[]>([]);
+  const [history, setHistory] = useState<Reading[]>([]);
   const [decided, setDecided] = useState<"approved" | "rejected" | null>(null);
   const [saving, setSaving] = useState(false);
 
@@ -30,18 +30,16 @@ export default function BinCard({ bin }: BinCardProps) {
     fetchHistory(bin.bin_id).then(setHistory);
   }, [bin.bin_id]);
 
-  async function handleDecision(decision: "approved" | "rejected") {
-    if (!bin.recommendation) return;
+  async function handleDecision(review_status: "approved" | "rejected") {
+    if (!bin.decision_id) return;
     setSaving(true);
     try {
       await postDecision({
         bin_id: bin.bin_id,
-        location: bin.location,
-        recommendation: bin.recommendation,
-        decision,
-        timestamp: new Date().toISOString(),
+        decision_id: bin.decision_id,
+        review_status,
       });
-      setDecided(decision);
+      setDecided(review_status);
     } catch {
       alert("Could not save decision — try again.");
     } finally {
@@ -58,7 +56,7 @@ export default function BinCard({ bin }: BinCardProps) {
         </span>
       </div>
       <FillGauge
-        percent={bin.fill_percent}
+        percent={bin.fill_percentage ?? 0}
         binId={bin.bin_id}
         classification={bin.classification}
       />
@@ -90,7 +88,11 @@ export default function BinCard({ bin }: BinCardProps) {
           )}
         </>
       )}
-      <p className="bin-updated">Updated: {new Date(bin.last_updated).toLocaleTimeString()}</p>
+      <p className="bin-updated">
+        {bin.last_updated
+          ? `Updated: ${new Date(bin.last_updated).toLocaleTimeString()}`
+          : "No readings yet"}
+      </p>
     </div>
   );
 }

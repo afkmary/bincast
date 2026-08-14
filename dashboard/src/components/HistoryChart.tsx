@@ -1,7 +1,7 @@
-import type { HistoryPoint } from "../api";
+import type { Reading } from "../api";
 
 interface HistoryChartProps {
-  data: HistoryPoint[];
+  data: Reading[];
   width?: number;
   height?: number;
 }
@@ -15,7 +15,7 @@ export default function HistoryChart({ data, width = 240, height = 100 }: Histor
 
   const points = data.map((d, i) => {
     const x = padding + i * stepX;
-    const y = height - padding - (d.fill_percent / maxVal) * (height - padding * 2);
+    const y = height - padding - (d.fill_percentage / maxVal) * (height - padding * 2);
     return `${x},${y}`;
   });
 

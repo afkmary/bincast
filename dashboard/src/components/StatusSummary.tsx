@@ -1,4 +1,3 @@
-// dashboard/src/components/StatusSummary.tsx
 import type { Bin } from "../api";
 
 interface StatusSummaryProps {
@@ -10,12 +9,14 @@ export default function StatusSummary({ bins }: StatusSummaryProps) {
     return <p className="queue-empty">No bins reporting.</p>;
   }
 
-  const needsPickup = bins.filter((b) => b.fill_percent >= 70).length;
+  const fill = (b: Bin) => b.fill_percentage ?? 0;
+
+  const needsPickup = bins.filter((b) => fill(b) >= 70).length;
   const flagged = bins.filter(
     (b) => b.classification === "obstructed" || b.classification === "anomaly"
   ).length;
   const avgFill = Math.round(
-    bins.reduce((sum, b) => sum + b.fill_percent, 0) / bins.length
+    bins.reduce((sum, b) => sum + fill(b), 0) / bins.length
   );
 
   // Highest fill first, but anything the agent flagged jumps the line.
@@ -23,7 +24,7 @@ export default function StatusSummary({ bins }: StatusSummaryProps) {
     const flaggedFirst = (bin: Bin) =>
       bin.classification === "obstructed" || bin.classification === "anomaly" ? 1 : 0;
     return (
-      flaggedFirst(b) - flaggedFirst(a) || b.fill_percent - a.fill_percent
+      flaggedFirst(b) - flaggedFirst(a) || fill(b) - fill(a)
     );
   })[0];
 
@@ -49,7 +50,11 @@ export default function StatusSummary({ bins }: StatusSummaryProps) {
         <p className="status-next">
           <span className="status-next-tag">Next up</span>
           <strong>{priority.location}</strong>
-          <span className="status-next-why">{priority.recommendation}</span>
+          <span className="status-next-why">
+            {priority.recommendation}
+            {priority.confidence != null &&
+              ` (${Math.round(priority.confidence * 100)}% confidence)`}
+          </span>
         </p>
       )}
     </div>
