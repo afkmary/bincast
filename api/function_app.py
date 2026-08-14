@@ -201,6 +201,39 @@ def get_bin_readings(req: func.HttpRequest) -> func.HttpResponse:
         "readings": readings,
     })
 
+@app.route(route="bins/{bin_id}", methods=["PATCH", "OPTIONS"], auth_level=ANON)
+def rename_bin(req: func.HttpRequest) -> func.HttpResponse:
+    """
+    Renames a bin. This is the only setup step the product has: clip the
+    device on, it auto-registers as "Unassigned", staff give it a name.
+    Nothing about the bin's depth or shape is ever configured by hand --
+    that's learned (differentiator #1).
+    """
+    if req.method == "OPTIONS":
+        return _preflight()
+
+    bin_id = req.route_params.get("bin_id")
+
+    try:
+        body = req.get_json()
+    except ValueError:
+        return _json_response({"error": "Request body must be valid JSON"}, 400)
+
+    location = (body or {}).get("location")
+    if not isinstance(location, str) or not location.strip():
+        return _json_response({"error": "Field 'location' must be a non-empty string"}, 400)
+
+    location = location.strip()[:60]
+
+    try:
+        store.upsert_bin(bin_id, location=location)
+    except Exception:
+        logging.exception("Failed to rename bin_id=%s", bin_id)
+        return _json_response({"error": "Internal storage error"}, 500)
+
+    logging.info("Renamed bin_id=%s to %r", bin_id, location)
+    return _json_response({"bin_id": bin_id, "location": location})
+
 
 @app.route(route="decisions", methods=["GET", "POST", "OPTIONS"], auth_level=ANON)
 def decisions(req: func.HttpRequest) -> func.HttpResponse:
@@ -369,7 +402,7 @@ def _now_iso() -> str:
 def _cors_headers() -> dict:
     return {
         "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Methods": "GET, POST, PATCH, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, x-functions-key",
         "Access-Control-Max-Age": "3600",
     }

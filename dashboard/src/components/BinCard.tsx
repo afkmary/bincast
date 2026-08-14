@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import FillGauge from "./FillGauge";
 import HistoryChart from "./HistoryChart";
-import { fetchHistory, postDecision, type Bin, type Reading } from "../api";
+import { fetchHistory, postDecision, renameBin, type Bin, type Reading } from "../api";
+
 
 interface BinCardProps {
   bin: Bin;
@@ -25,6 +26,9 @@ export default function BinCard({ bin }: BinCardProps) {
   const [history, setHistory] = useState<Reading[]>([]);
   const [decided, setDecided] = useState<"approved" | "rejected" | null>(null);
   const [saving, setSaving] = useState(false);
+  const [name, setName] = useState(bin.location);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(bin.location);
 
   useEffect(() => {
     fetchHistory(bin.bin_id).then(setHistory);
@@ -47,10 +51,44 @@ export default function BinCard({ bin }: BinCardProps) {
     }
   }
 
+  async function saveName() {
+    const next = draft.trim();
+    setEditing(false);
+    if (!next || next === name) return;
+    const previous = name;
+    setName(next);                    // optimistic
+    try {
+      await renameBin(bin.bin_id, next);
+    } catch {
+      setName(previous);              // roll back if the API rejects it
+      alert("Could not rename — try again.");
+    }
+  }
+
   return (
     <div className="bin-card">
       <div className="bin-card-header">
-        <h3>{bin.location}</h3>
+        {editing ? (
+          <input
+            className="bin-name-input"
+            value={draft}
+            autoFocus
+            onChange={(e) => setDraft(e.target.value)}
+            onBlur={saveName}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") saveName();
+              if (e.key === "Escape") { setDraft(name); setEditing(false); }
+            }}
+          />
+        ) : (
+          <h3
+            className="bin-name"
+            onClick={() => { setDraft(name); setEditing(true); }}
+            title="Click to rename"
+          >
+            {name}
+          </h3>
+        )}
         <span className="bin-tag" style={{ backgroundColor: classificationColor[bin.classification] }}>
           {classificationLabel[bin.classification]}
         </span>

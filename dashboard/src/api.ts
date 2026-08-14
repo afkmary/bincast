@@ -164,3 +164,11 @@ export function postDecision(input: {
     body: JSON.stringify(input),
   });
 }
+
+/** Rename a bin. The only manual setup step in the product. */
+export function renameBin(binId: string, location: string): Promise<{ bin_id: string; location: string }> {
+  return request(`/bins/${encodeURIComponent(binId)}`, {
+    method: "PATCH",
+    body: JSON.stringify({ location }),
+  });
+}
