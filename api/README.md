@@ -59,6 +59,5 @@ Data Contract, and stores them in Azure Table Storage.
 
 ## Notes for the AI/ML side of the capstone vs. this project
 
-This is the **BinCast** backend (waste bin project), separate from the **MPAE**
-capstone AI/ML service. Same pattern (Azure Function + validation + storage),
+This is the **BinCast** backend. Same pattern (Azure Function + validation + storage),
 different schema and different repo — don't mix the two up when copying code.
