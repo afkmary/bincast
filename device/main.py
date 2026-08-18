@@ -6,10 +6,6 @@ Reads the ultrasonic sensor, feeds calibration, works out fill % and status,
 drives the LCD and RGB LED, and sends the reading to the cloud (caching it
 locally if that fails).
 
-This file is the merge point between the two halves described in the
-README (sensing vs. output+cloud). It owns the loop and the order of
-operations; it does not contain sensor maths, light rules, or payload
-shape -- those stay in their own modules.
 """
 
 import time
