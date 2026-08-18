@@ -201,18 +201,26 @@ def get_bin_readings(req: func.HttpRequest) -> func.HttpResponse:
         "readings": readings,
     })
 
-@app.route(route="bins/{bin_id}", methods=["PATCH", "OPTIONS"], auth_level=ANON)
-def rename_bin(req: func.HttpRequest) -> func.HttpResponse:
+@app.route(route="bins/{bin_id}", methods=["PATCH", "DELETE", "OPTIONS"], auth_level=ANON)
+def bin_detail(req: func.HttpRequest) -> func.HttpResponse:
     """
-    Renames a bin. This is the only setup step the product has: clip the
-    device on, it auto-registers as "Unassigned", staff give it a name.
-    Nothing about the bin's depth or shape is ever configured by hand --
-    that's learned (differentiator #1).
+    PATCH  — renames a bin. The only routine setup step in the product.
+    DELETE — permanently removes a bin and its readings/decisions. For
+             clearing accidental test entries — no undo.
     """
     if req.method == "OPTIONS":
         return _preflight()
 
     bin_id = req.route_params.get("bin_id")
+
+    if req.method == "DELETE":
+        try:
+            result = store.delete_bin(bin_id)
+        except Exception:
+            logging.exception("Failed to delete bin_id=%s", bin_id)
+            return _json_response({"error": "Internal storage error"}, 500)
+        logging.info("Deleted bin_id=%s: %s", bin_id, result)
+        return _json_response(result)
 
     try:
         body = req.get_json()
@@ -402,7 +410,7 @@ def _now_iso() -> str:
 def _cors_headers() -> dict:
     return {
         "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
-        "Access-Control-Allow-Methods": "GET, POST, PATCH, OPTIONS",
+                "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, x-functions-key",
         "Access-Control-Max-Age": "3600",
     }

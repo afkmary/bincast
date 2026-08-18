@@ -262,3 +262,43 @@ def list_bins() -> list:
     """Returns the bin roster: every bin the system has ever seen."""
     table_client = get_table_client(BINS_TABLE)
     return [_unflatten(e) for e in table_client.list_entities()]
+
+def delete_bin(bin_id: str) -> dict:
+    """
+    Permanently removes a bin and every reading/decision recorded for it.
+
+    Meant for clearing out accidental test entries (test_button.py runs,
+    demo dry-runs) — not a routine action. There is no undo: once this
+    runs, the readings are gone from Table Storage, not just hidden.
+    """
+    readings_deleted = _delete_partition(READINGS_TABLE, bin_id)
+    decisions_deleted = _delete_partition(DECISIONS_TABLE, bin_id)
+
+    bins_table = get_table_client(BINS_TABLE)
+    try:
+        bins_table.delete_entity(partition_key="bin", row_key=bin_id)
+        bin_deleted = True
+    except ResourceNotFoundError:
+        bin_deleted = False
+
+    return {
+        "bin_id": bin_id,
+        "bin_deleted": bin_deleted,
+        "readings_deleted": readings_deleted,
+        "decisions_deleted": decisions_deleted,
+    }
+
+
+def _delete_partition(table_name: str, partition_key: str) -> int:
+    """Deletes every entity in one partition. Returns how many were removed."""
+    table_client = get_table_client(table_name)
+    entities = table_client.query_entities(
+        query_filter="PartitionKey eq @pk",
+        parameters={"pk": _escape(partition_key)},
+        select=["PartitionKey", "RowKey"],
+    )
+    count = 0
+    for entity in entities:
+        table_client.delete_entity(partition_key=entity["PartitionKey"], row_key=entity["RowKey"])
+        count += 1
+    return count

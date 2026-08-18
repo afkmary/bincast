@@ -32,11 +32,23 @@ function App() {
           <StatusSummary bins={bins} />
         </section>
 
-        <div className="bin-grid">
-          {bins.map((bin) => (
-            <BinCard key={bin.bin_id} bin={bin} />
-          ))}
-        </div>
+        {bins.length === 0 ? (
+          <div className="empty-state">
+            <h3>No bins reporting yet</h3>
+            <p>
+              A bin shows up here automatically the moment its device sends
+              its first reading — bin ID comes from the device's own config,
+              not from the dashboard. Nothing to set up here; just power on
+              the device.
+            </p>
+          </div>
+        ) : (
+          <div className="bin-grid">
+            {bins.map((bin) => (
+              <BinCard key={bin.bin_id} bin={bin} />
+            ))}
+          </div>
+        )}
 
         <section className="queue-section">
           <h2>Decision Log</h2>

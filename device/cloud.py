@@ -84,7 +84,7 @@ def send(reading: dict) -> bool:
 
     headers = {"Content-Type": "application/json"}
     if config.API_KEY:
-        headers["x-api-key"] = config.API_KEY
+        headers["x-functions-key"] = config.API_KEY
 
     try:
         response = requests.post(
