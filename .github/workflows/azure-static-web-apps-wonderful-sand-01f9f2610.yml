@@ -44,7 +44,7 @@ jobs:
           app_build_command: "npm run build"
           github_id_token: ${{ steps.idtoken.outputs.result }}
         env:
-          VITE_API_URL: https://bincast-api-gdcxgybda9b2etc3.westus2-01.azurewebsites.net
+          VITE_API_URL: https://bincast-api-gdcxgybda9b2etc3.westus2-01.azurewebsites.net/api
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
