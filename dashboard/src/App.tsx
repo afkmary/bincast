@@ -37,9 +37,7 @@ function App() {
             <h3>No bins reporting yet</h3>
             <p>
               A bin shows up here automatically the moment its device sends
-              its first reading — bin ID comes from the device's own config,
-              not from the dashboard. Nothing to set up here; just power on
-              the device.
+              its first reading.
             </p>
           </div>
         ) : (
