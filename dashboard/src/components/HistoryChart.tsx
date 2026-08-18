@@ -22,7 +22,7 @@ export default function HistoryChart({ data, width = 240, height = 100 }: Histor
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <polyline points={points.join(" ")} fill="none" stroke="#1976d2" strokeWidth="2" />
-      {data.map((d, i) => {
+      {data.map((_, i) => {
         const [x, y] = points[i].split(",").map(Number);
         return <circle key={i} cx={x} cy={y} r="3" fill="#1976d2" />;
       })}
