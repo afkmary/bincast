@@ -40,7 +40,7 @@ SAMPLE_GAP_SEC = 0.06           # pause between pings so echoes don't overlap
 
 # --- Sensor ------------------------------------------------------------------
 TRIG_PIN = 23
-ECHO_PIN = 24
+ECHO_PIN = 5
 
 MIN_VALID_CM = 2.0              # HC-SR04 cannot resolve closer than this
 MAX_VALID_CM = 400.0            # nor further than this

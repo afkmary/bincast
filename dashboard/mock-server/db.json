@@ -3,10 +3,10 @@
     {
       "bin_id": "bin-001",
       "location": "Main Building - Lobby",
-      "fill_percent": 82,
-      "classification": "full",
-      "last_updated": "2026-08-04T14:32:00Z",
-      "recommendation": "Bin nearing capacity - schedule pickup soon."
+      "fill_percent": 35,
+      "classification": "not_full",
+      "last_updated": "2026-08-19T14:32:00Z",
+      "recommendation": null
     },
     {
       "bin_id": "bin-002",
